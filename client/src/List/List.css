@@ -1,0 +1,62 @@
+.item {
+	min-width: 50vw;
+	padding-bottom: 6px;
+	color: #e8e8e8;
+	font-size: calc(10px + 1.5vmin);
+	display: flex;
+	align-items: center;
+}
+
+.item-name {
+	align-self: flex-start;
+	flex: 4;
+}
+
+.item-action {
+	align-self: flex-end;
+	font-size: calc(10px + 1vmin);
+	flex: 1;
+	text-align: end;
+}
+
+.item-action > ion-icon {
+	cursor: pointer;
+}
+
+.item-cross {
+	color: #545454;
+	text-transform: capitalize;
+}
+
+.item-delete {
+	color: #5c86a7;
+	text-transform: capitalize;
+}
+
+.no-items {
+	color: grey;
+	font-size: calc(10px + 2vmin);
+}
+
+.list-container {
+	text-align: start;
+	display: flex;
+	flex-direction: column;
+}
+
+.crossed-off {
+	text-decoration: line-through;
+	color: #545454;
+}
+
+.checkmark-green {
+	color: #81f9a1;
+}
+
+.undo-blue {
+	color: #66d1f8;
+}
+
+.delete-red {
+	color: #f97594;
+}
