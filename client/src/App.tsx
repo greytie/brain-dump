@@ -1,16 +1,22 @@
 import './App.css'
 import '@picocss/pico'
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import List from './List/List'
 import TitleBox from './TitleBox/TitleBox'
 import AddItemBox from './AddItemBox/AddItemBox'
 import { readItemStorage, updateItemStorage } from './lib/storage'
 import { downloadTextAsFile, getTextFromFileAsync } from './lib/file-io'
 
+interface Item {
+  name: string
+  crossedOff: boolean
+  objectID: number
+}
+
 const App = () => {
 	const [itemStore, setItemStore] = React.useState(readItemStorage())
 
-	const handleNewItem = (event) => {
+	const handleNewItem = (event: SyntheticEvent) => {
 		event.preventDefault()
 		if (!newItemInput || newItemInput.trim().length === 0) {
 			console.log("No text in input, can't add task.")
@@ -31,9 +37,9 @@ const App = () => {
 		setNewItemInput('')
 	}
 
-	const handleItemDeletion = (deleteItemID) => {
+	const handleItemDeletion = (deleteItemID: number) => {
 		itemStore.items = itemStore.items.filter(
-			(item) => item.objectID !== deleteItemID
+			(item: Item) => item.objectID !== deleteItemID
 		)
 
 		setItemStore({
@@ -42,9 +48,9 @@ const App = () => {
 		})
 	}
 
-	const toggleCrossOff = (crossedItemID) => {
+	const toggleCrossOff = (crossedItemID: number) => {
 		const updatedItem = itemStore.items.find(
-			(item) => item.objectID === crossedItemID
+			(item: Item) => item.objectID === crossedItemID
 		)
 		if (updatedItem == null) {
 			return
@@ -59,8 +65,10 @@ const App = () => {
 
 	const [newItemInput, setNewItemInput] = React.useState('')
 
-	const handleNewItemInputChange = (event) => {
-		setNewItemInput(event.target.value)
+	const handleNewItemInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    if (event.target ) {
+      setNewItemInput(event.target.value)
+    }
 	}
 
 	React.useEffect(() => {
@@ -68,18 +76,18 @@ const App = () => {
 		updateItemStorage(itemStore)
 	}, [itemStore])
 
-	const onExport = (event) => {
+	const onExport = (event: SyntheticEvent) => {
 		event.preventDefault()
 		downloadTextAsFile(JSON.stringify(itemStore), 'task_export.txt')
 	}
 
-	const onImport = async (event) => {
+	const onImport: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
 		const input = event.target
-		if ('files' in input && input.files.length > 0) {
+		if ('files' in input && input.files && input.files.length > 0) {
 			const importedJson = await getTextFromFileAsync(input.files[0])
 
 			// TODO: Should validate that imported string
-			setItemStore(JSON.parse(importedJson))
+			setItemStore(JSON.parse(importedJson as string))
 		}
 	}
 

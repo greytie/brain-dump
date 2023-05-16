@@ -2,7 +2,7 @@
  * Got from: https://stackoverflow.com/questions/44656610/download-a-string-as-txt-file-in-react
  * @param {*} text
  */
-export const downloadTextAsFile = (text, fileName) => {
+export const downloadTextAsFile = (text: string, fileName: string) => {
 	const element = document.createElement('a')
 	const file = new Blob([text], {
 		type: 'text/plain',
@@ -19,7 +19,7 @@ export const downloadTextAsFile = (text, fileName) => {
  * @param {*} file
  * @returns
  */
-export const getTextFromFileAsync = async (file) => {
+export const getTextFromFileAsync = async (file: any) => {
 	try {
 		const content = await readFileContent(file)
 		return content
@@ -28,10 +28,14 @@ export const getTextFromFileAsync = async (file) => {
 	}
 }
 
-const readFileContent = (file) => {
+const readFileContent = (file: any) => {
 	const reader = new FileReader()
 	return new Promise((resolve, reject) => {
-		reader.onload = (event) => resolve(event.target.result)
+		reader.onload = (event) =>  {
+			if (event.target) {
+				return resolve(event.target.result)
+			}
+		}
 		reader.onerror = (error) => reject(error)
 		reader.readAsText(file)
 	})

@@ -14,7 +14,7 @@ const readItemStorage = () => {
 	}
 }
 
-const updateItemStorage = (itemStorage) => {
+const updateItemStorage = (itemStorage: any) => {
 	localStorage.setItem('itemStorage', JSON.stringify(itemStorage))
 }
 

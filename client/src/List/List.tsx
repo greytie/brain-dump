@@ -6,11 +6,11 @@ import {
 } from 'ionicons/icons'
 import './List.css'
 
-const List = ({ list, handleItemDeletion, toggleCrossOff }) => {
+const List = ({ list, handleItemDeletion, toggleCrossOff }: any) => {
 	return (
 		<div className="list-container">
 			{list && list.length > 0 ? (
-				list.map(({ objectID, name, crossedOff }) => (
+				list.map(({ objectID, name, crossedOff }: any) => (
 					<div key={objectID} className="item">
 						<span className={'item-name' + (crossedOff ? ' crossed-off' : '')}>
 							{name}
