@@ -16,6 +16,11 @@ interface Item {
 const App = () => {
 	const [itemStore, setItemStore] = React.useState(readItemStorage())
 
+	console.log(import.meta.env.BASE_URL);
+	fetch(import.meta.env.VITE_API_IP)
+		.then(res => console.log(res))
+		.catch(err => console.error(err))
+
 	const handleNewItem = (event: SyntheticEvent) => {
 		event.preventDefault()
 		if (!newItemInput || newItemInput.trim().length === 0) {

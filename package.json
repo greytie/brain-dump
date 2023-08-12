@@ -1,0 +1,13 @@
+{
+  "name": "brain-dump",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker-remote": "docker-compose --context remote up -d",
+    "docker-remote-stop": "docker-compose --context remote stop"
+  },
+  "author": "",
+  "license": "ISC"
+}
