@@ -21,6 +21,12 @@ const App = () => {
 		.then(res => console.log(res))
 		.catch(err => console.error(err))
 
+	fetch('/.netlify/functions/hello-world')	
+		.then(res => {
+			console.log(res);
+		})
+		.catch(err => console.error(err))
+
 	const handleNewItem = (event: SyntheticEvent) => {
 		event.preventDefault()
 		if (!newItemInput || newItemInput.trim().length === 0) {
