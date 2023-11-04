@@ -15,17 +15,19 @@ interface Item {
 
 const App = () => {
 	const [itemStore, setItemStore] = React.useState(readItemStorage())
-
-	console.log(import.meta.env.BASE_URL);
-	fetch(import.meta.env.VITE_API_IP)
-		.then(res => console.log(res))
+	
+	if (import.meta.env.VITE_NETLIFY_FUNCTIONS_URL) {
+		fetch(import.meta.env.VITE_NETLIFY_FUNCTIONS_URL + `/.netlify/functions/hello-world`)
+		.then(async res => console.log(await res.json()))
 		.catch(err => console.error(err))
-
-	fetch('/.netlify/functions/hello-world')	
-		.then(res => {
-			console.log(res);
+	}
+	else {
+		fetch('/.netlify/functions/hello-world')	
+		.then(async res => {
+			console.log(await res.json());
 		})
 		.catch(err => console.error(err))
+	}	
 
 	const handleNewItem = (event: SyntheticEvent) => {
 		event.preventDefault()
