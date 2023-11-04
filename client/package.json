@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+	"install-fcn-dep": "cd netlify/functions && npm i",
+	"netlify-build": "npm run build && npm run install-fcn-dep",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "fcn-start": "netlify functions:serve",
