@@ -17,12 +17,12 @@ const App = () => {
 	const [itemStore, setItemStore] = React.useState(readItemStorage())
 	
 	if (import.meta.env.VITE_NETLIFY_FUNCTIONS_URL) {
-		fetch(import.meta.env.VITE_NETLIFY_FUNCTIONS_URL + `/.netlify/functions/day`)
+		fetch(import.meta.env.VITE_NETLIFY_FUNCTIONS_URL + `/.netlify/functions/food`)
 		.then(async res => console.log(await res.json()))
 		.catch(err => console.error(err))
 	}
 	else {
-		fetch('/.netlify/functions/day')	
+		fetch('/.netlify/functions/food')	
 		.then(async res => {
 			console.log(await res.json());
 		})
